@@ -63,7 +63,7 @@ public class ClienteService {
     }
 
     private Item obterRecomendacao(Cliente cliente) {
-        var comprasPorCliente = compraService.obterCompras(cliente);
+        var comprasPorCliente = compraService.obterCompras(cliente.getCpf());
         Set<String> categorias = obterCategorias(comprasPorCliente);
         Optional<CategoriaQuantidade> categoriaMaisComprada = obterCategoriaMaisComprada(comprasPorCliente, categorias);
         return comprasPorCliente.stream()

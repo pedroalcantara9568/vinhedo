@@ -1,12 +1,14 @@
 package com.example.vinhedo.v1.domain;
 
 import com.example.vinhedo.v1.annotations.LocalDateFormatter;
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Data
+@Builder
 public class Compra implements Comparable<Compra> {
 
     private String codigo;

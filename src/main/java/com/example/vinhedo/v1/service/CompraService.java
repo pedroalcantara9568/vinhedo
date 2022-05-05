@@ -1,7 +1,6 @@
 package com.example.vinhedo.v1.service;
 
 import com.example.vinhedo.v1.client.impl.CompraClientImpl;
-import com.example.vinhedo.v1.domain.Cliente;
 import com.example.vinhedo.v1.domain.Compra;
 import com.example.vinhedo.v1.exception.ResourceNotFoundException;
 import lombok.extern.slf4j.Slf4j;
@@ -36,10 +35,10 @@ public class CompraService {
             .orElseThrow(() -> new ResourceNotFoundException("Não existe Compra para o o ano: " + ano + ""));
     }
 
-    public List<Compra> obterCompras(Cliente cliente) {
+    public List<Compra> obterCompras(String cpf) {
         return compraClient.getCompras()
             .stream()
-            .filter(compra -> formatarCpf(cliente.getCpf()).equals(formatarCpf(compra.getCliente())))
+            .filter(compra -> formatarCpf(cpf).equals(formatarCpf(compra.getCliente())))
             .collect(Collectors.toList());
     }
 
