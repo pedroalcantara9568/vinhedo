@@ -2,6 +2,7 @@ package com.example.vinhedo.v1.client;
 
 
 import com.example.vinhedo.v1.domain.Cliente;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -2,8 +2,10 @@ package com.example.vinhedo.v1.client.impl;
 
 import com.example.vinhedo.v1.client.ClienteClient;
 import com.example.vinhedo.v1.domain.Cliente;
-import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,10 +13,13 @@ import java.util.List;
 
 @Service
 @Slf4j
+@CacheConfig(cacheNames={"clientes"})
 public class ClienteClientImpl {
 
+    @Autowired
     ClienteClient clienteClient;
 
+    @Cacheable
     public List<Cliente> getClientes() {
         try {
             log.info("consultando serviço de compras");
