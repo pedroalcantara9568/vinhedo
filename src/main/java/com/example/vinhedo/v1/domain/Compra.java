@@ -20,7 +20,11 @@ public class Compra implements Comparable<Compra> {
     private int valorTotal;
 
     @Builder
-    public Compra(String codigo, LocalDate data, String cliente, List<Item> itens, int valorTotal) {
+    public Compra(String codigo,
+                  LocalDate data,
+                  String cliente,
+                  List<Item> itens,
+                  int valorTotal) {
         this.codigo = codigo;
         this.data = data;
         this.cliente = cliente;

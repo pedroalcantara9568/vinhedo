@@ -13,7 +13,9 @@ public class Cliente {
     private String cpf;
 
     @Builder
-    public Cliente(Integer id, String nome, String cpf) {
+    public Cliente(Integer id,
+                   String nome,
+                   String cpf) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;

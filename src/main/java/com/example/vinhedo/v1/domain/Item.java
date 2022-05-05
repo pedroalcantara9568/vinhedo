@@ -17,7 +17,13 @@ public class Item {
     private int preco;
 
     @Builder
-    public Item(String codigo, String produto, String variedade, String pais, String categoria, String safra, int preco) {
+    public Item(String codigo,
+                String produto,
+                String variedade,
+                String pais,
+                String categoria,
+                String safra,
+                int preco) {
         this.codigo = codigo;
         this.produto = produto;
         this.variedade = variedade;
