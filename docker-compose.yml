@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  vinhedo:
+    container_name: vinhedo
+    image: vinhedo:0.0.1-SNAPSHOT
+    ports:
+      - 8080:8080
+
+
+
