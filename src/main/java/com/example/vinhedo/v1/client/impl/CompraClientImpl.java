@@ -21,7 +21,7 @@ public class CompraClientImpl {
             var compras = compraClient.obterCompras();
             log.info("compras: {}", compras);
             return compras;
-        } catch (FeignException e) {
+        } catch (Exception e) {
             log.info("Erro ao consultar serviço de compras");
             throw e;
         }

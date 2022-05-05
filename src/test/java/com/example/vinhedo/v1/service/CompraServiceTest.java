@@ -29,7 +29,7 @@ class CompraServiceTest {
     @Test
     void getCompras() {
         List<Compra> expected = CompraMockList.build().stream().sorted().collect(Collectors.toList());
-        Mockito.when(compraClient.getCompras()).thenReturn(CompraMockList.build());
+        Mockito.when(compraClient.getCompras()).thenReturn(expected);
         List<Compra> result = compraService.getCompras();
         Assertions.assertEquals(expected, result);
     }
@@ -37,7 +37,7 @@ class CompraServiceTest {
     @Test
     void obterMaiorCompraPorAno() {
         Compra expected = CompraMock.build("000.000.000-01", ItemMockList.build(), 150, LocalDate.of(2022, 04, 04));
-        Mockito.when(compraClient.getCompras()).thenReturn(CompraMockList.build());
+        Mockito.when(compraClient.getCompras()).thenReturn(List.of(expected));
         Compra result = compraService.obterMaiorCompraPorAno(2022);
         Assertions.assertEquals(expected, result);
     }
@@ -45,7 +45,7 @@ class CompraServiceTest {
     @Test
     void obterCompras() {
         List<Compra> expected = CompraMockList.build();
-        Mockito.when(compraClient.getCompras()).thenReturn(CompraMockList.build());
+        Mockito.when(compraClient.getCompras()).thenReturn(expected);
         List<Compra> result = compraService.obterCompras("000.000.000-01");
         Assertions.assertEquals(expected, result);
     }
