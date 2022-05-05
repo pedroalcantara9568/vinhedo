@@ -4,9 +4,7 @@ import com.example.vinhedo.v1.domain.Cliente;
 
 import java.util.List;
 
-
 public class ClienteMockList {
-
 
     public static List<Cliente> build() {
         return List.of(

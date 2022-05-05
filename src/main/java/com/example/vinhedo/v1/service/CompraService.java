@@ -20,14 +20,14 @@ public class CompraService {
     private CompraClientImpl compraClient;
 
     public List<Compra> getCompras() {
-        return compraClient.getCompras()
+        return compraClient.obterCompras()
             .stream()
             .sorted()
             .collect(Collectors.toList());
     }
 
     public Compra obterMaiorCompraPorAno(Integer ano) {
-        return compraClient.getCompras()
+        return compraClient.obterCompras()
             .stream()
             .filter(compra -> ano.equals(compra.getData().getYear()))
             .sorted()
@@ -36,7 +36,7 @@ public class CompraService {
     }
 
     public List<Compra> obterCompras(String cpf) {
-        return compraClient.getCompras()
+        return compraClient.obterCompras()
             .stream()
             .filter(compra -> formatarCpf(cpf).equals(formatarCpf(compra.getCliente())))
             .collect(Collectors.toList());

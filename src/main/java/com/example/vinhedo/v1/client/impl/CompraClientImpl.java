@@ -21,7 +21,7 @@ public class CompraClientImpl {
     CompraClient compraClient;
 
     @Cacheable
-    public List<Compra> getCompras() {
+    public List<Compra> obterCompras() {
         try {
             log.info("consultando serviço de compras");
             var compras = compraClient.obterCompras();

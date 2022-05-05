@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -65,28 +64,36 @@ public class ClienteService {
     private Item obterRecomendacao(Cliente cliente) {
         var comprasPorCliente = compraService.obterCompras(cliente.getCpf());
         Set<String> categorias = obterCategorias(comprasPorCliente);
-        Optional<CategoriaQuantidade> categoriaMaisComprada = obterCategoriaMaisComprada(comprasPorCliente, categorias);
+        var categoriaMaisComprada = obterCategoriaMaisComprada(comprasPorCliente, categorias);
         return comprasPorCliente.stream()
             .map(Compra::getItens)
-            .flatMap(items -> items.stream().filter(item1 -> item1.getCategoria().equals(categoriaMaisComprada.get().getCategoria())))
-            .collect(Collectors.toList()).stream().findFirst().orElseThrow(() -> new ResourceNotFoundException("Não existe Compra para o cliente buscado"));
+            .flatMap(items -> items.stream().filter(item1 -> item1.getCategoria().equals(categoriaMaisComprada.getCategoria())))
+            .findAny().orElseThrow();
     }
 
-    private Set<String> obterCategorias(List<Compra> collect) {
-        return collect.stream()
+    private Set<String> obterCategorias(List<Compra> compras) {
+        return compras.stream()
             .map(Compra::getItens)
             .flatMap(items -> items.stream().map(Item::getCategoria))
             .collect(Collectors.toSet());
     }
 
-    private Optional<CategoriaQuantidade> obterCategoriaMaisComprada(List<Compra> collect, Set<String> categorias) {
+    private CategoriaQuantidade obterCategoriaMaisComprada(List<Compra> compras, Set<String> categorias) {
         List<CategoriaQuantidade> quantidades = new ArrayList<>();
         categorias.forEach(categoria -> {
-            var collect1 = collect.stream().map(Compra::getItens)
-                .flatMap(items -> items.stream().filter(item -> item.getCategoria().equals(categoria)))
-                .reduce(0, (contador, item) -> contador + 1, Integer::sum);
+            var collect1 = contarQuantidadePorCategoria(compras, categoria);
             quantidades.add(new CategoriaQuantidade(categoria, collect1));
         });
-        return quantidades.stream().sorted().collect(Collectors.toList()).stream().findFirst();
+        return ordenarCategoriaPorQuantidade(quantidades);
+    }
+
+    private Integer contarQuantidadePorCategoria(List<Compra> collect, String categoria) {
+        return collect.stream().map(Compra::getItens)
+            .flatMap(items -> items.stream().filter(item -> item.getCategoria().equals(categoria)))
+            .reduce(0, (contador, item) -> contador + 1, Integer::sum);
+    }
+
+    private CategoriaQuantidade ordenarCategoriaPorQuantidade(List<CategoriaQuantidade> quantidades) {
+        return quantidades.stream().sorted().collect(Collectors.toList()).stream().findFirst().orElseThrow(() -> new ResourceNotFoundException("Não existe Compra para o cliente buscado"));
     }
 }

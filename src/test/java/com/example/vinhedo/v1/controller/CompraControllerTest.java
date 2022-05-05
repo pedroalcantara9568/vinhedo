@@ -42,6 +42,7 @@ class CompraControllerTest {
     @Test
     void obterCompras() {
         Mockito.when(compraService.obterCompras(any())).thenReturn(CompraMockList.build());
+
         RestAssured.given().contentType(ContentType.JSON)
             .when()
             .get("/compras")

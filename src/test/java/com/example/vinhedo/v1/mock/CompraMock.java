@@ -5,7 +5,6 @@ import com.example.vinhedo.v1.domain.Item;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 public class CompraMock {
     public static Compra build(String cliente, List<Item> itemList, Integer valorTotal, LocalDate data) {

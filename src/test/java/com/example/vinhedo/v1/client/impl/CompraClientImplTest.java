@@ -24,18 +24,16 @@ class CompraClientImplTest {
     @Test
     void getCompras() {
         var expected = CompraMockList.build();
-        Mockito.when(compraClientImpl.getCompras()).thenReturn(expected);
-
-        var result = compraClientImpl.getCompras();
+        Mockito.when(compraClientImpl.obterCompras()).thenReturn(expected);
+        var result = compraClientImpl.obterCompras();
 
         assertEquals(expected, result);
     }
 
     @Test
     void getClientesException() {
-        Mockito.when(compraClientImpl.getCompras()).thenThrow(new RuntimeException("erro de rede"));
+        Mockito.when(compraClient.obterCompras()).thenThrow(new RuntimeException("erro de rede"));
 
-
-        assertThrows(RuntimeException.class, () -> compraClientImpl.getCompras());
+        assertThrows(RuntimeException.class, () -> compraClientImpl.obterCompras());
     }
 }
