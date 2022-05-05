@@ -12,14 +12,14 @@ import java.util.List;
 public interface CompraDoc {
 
     @DefaultSwaggerMapping
-    public ResponseEntity<List<Compra>> obterCompras();
+    ResponseEntity<List<Compra>> obterCompras();
 
     @DefaultSwaggerMapping
-    public ResponseEntity<Compra> obterMaiorCompraPorAno(@PathVariable("ano") Integer ano);
+    ResponseEntity<Compra> obterMaiorCompraPorAno(@PathVariable("ano") Integer ano);
 
     @DefaultSwaggerMapping
-    public ResponseEntity<List<Cliente>> obterClientesFieis();
+    ResponseEntity<List<Cliente>> obterClientesFieis();
 
     @DefaultSwaggerMapping
-    public ResponseEntity<Item> getRecomendacao(@PathVariable("id") Integer id);
+    ResponseEntity<Item> getRecomendacao(@PathVariable("id") Integer id);
 }
