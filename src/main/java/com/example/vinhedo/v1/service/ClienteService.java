@@ -81,8 +81,8 @@ public class ClienteService {
     private CategoriaQuantidade obterCategoriaMaisComprada(List<Compra> compras, Set<String> categorias) {
         List<CategoriaQuantidade> quantidades = new ArrayList<>();
         categorias.forEach(categoria -> {
-            var collect1 = contarQuantidadePorCategoria(compras, categoria);
-            quantidades.add(new CategoriaQuantidade(categoria, collect1));
+            var somatorio = contarQuantidadePorCategoria(compras, categoria);
+            quantidades.add(new CategoriaQuantidade(categoria, somatorio));
         });
         return ordenarCategoriaPorQuantidade(quantidades);
     }
