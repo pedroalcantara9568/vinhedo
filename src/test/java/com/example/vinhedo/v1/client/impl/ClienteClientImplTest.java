@@ -37,6 +37,6 @@ class ClienteClientImplTest {
     void getClientesException() {
         Mockito.when(clienteClient.obterClientes()).thenThrow(new RuntimeException("erro de rede"));
 
-        assertThrows(RuntimeException.class, () -> clienteClient.obterClientes());
+        assertThrows(RuntimeException.class, () -> clienteClientImpl.getClientes());
     }
 }
